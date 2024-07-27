@@ -1,0 +1,48 @@
+{
+  "status": "success",
+  "data": {
+    "date": "2024-06-07",
+    "orderCnt": 14,
+    "orderDetailCnt": 14,
+    "platformCnt": {
+      "Quick": 14
+    },
+    "menuCnt": {
+      "boneless original spicy 6p": 10,
+      "timer 30s": 2,
+      "French fry 6p": 1,
+      "boneless garlic spicy 6p": 1
+    },
+    "categoryCnt": {
+      "French fry": 1,
+      "chicken  thighs": 11,
+      "further cooking": 2
+    },
+    "timeCnt": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 1,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 1,
+      "19": 0,
+      "20": 0,
+      "21": 10,
+      "22": 0,
+      "23": 2
+    }
+  }
+}

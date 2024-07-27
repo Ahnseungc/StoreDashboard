@@ -1,0 +1,47 @@
+{
+  "status": "success",
+  "data": {
+    "date": "2024-06-04",
+    "orderCnt": 23,
+    "orderDetailCnt": 23,
+    "platformCnt": {
+      "Hall": 1,
+      "Quick": 22
+    },
+    "menuCnt": {
+      "boneless original spicy 6p": 19,
+      "boneless sweet spicy 6p": 3,
+      "French fry 6p": 1
+    },
+    "categoryCnt": {
+      "French fry": 1,
+      "chicken  thighs": 22
+    },
+    "timeCnt": {
+      "0": 3,
+      "1": 5,
+      "2": 3,
+      "3": 0,
+      "4": 0,
+      "5": 1,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 1,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 2,
+      "20": 2,
+      "21": 2,
+      "22": 3,
+      "23": 1
+    }
+  }
+}

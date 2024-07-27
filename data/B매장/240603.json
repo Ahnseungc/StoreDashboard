@@ -1,0 +1,44 @@
+{
+  "status": "success",
+  "data": {
+    "date": "2024-06-03",
+    "orderCnt": 25,
+    "orderDetailCnt": 25,
+    "platformCnt": {
+      "Quick": 25
+    },
+    "menuCnt": {
+      "boneless original spicy 6p": 24,
+      "boneless sweet spicy 6p": 1
+    },
+    "categoryCnt": {
+      "chicken  thighs": 25
+    },
+    "timeCnt": {
+      "0": 2,
+      "1": 3,
+      "2": 3,
+      "3": 4,
+      "4": 2,
+      "5": 1,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 1,
+      "19": 0,
+      "20": 3,
+      "21": 2,
+      "22": 2,
+      "23": 2
+    }
+  }
+}
