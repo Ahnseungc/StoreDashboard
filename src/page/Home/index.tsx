@@ -1,10 +1,12 @@
-const Home = () => {
+import { FC } from "react";
+import { RenewData } from "@utils/dataPreprocessing";
+import StoreList from "src/components/home/store/storeList";
+
+const Home: FC = () => {
+  const storeList = ["A매장", "B매장", "C매장", "D매장"];
   return (
     <section>
-      <div>매장 A</div>
-      <div>매장 B</div>
-      <div>매장 C</div>
-      <div>매장 D</div>
+      <StoreList stores={storeList} />
     </section>
   );
 };
