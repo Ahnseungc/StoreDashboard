@@ -1,5 +1,6 @@
 import { orderSum } from "./orderSum";
 import { HighOrderTime } from "./highOrderTime";
+import { highOrderPlatform } from "./highOrderPlatform";
 
 const directoryPathA = "/data/A매장/";
 const directoryPathB = "/data/B매장/";
@@ -21,14 +22,34 @@ export const RenewData = async () => {
   const fetachC = await fetchDataC();
   const fetachD = await fetchDataD();
   console.log(fetachA);
-  console.log(HighOrderTime(fetachA));
+  console.log(highOrderPlatform(fetachA));
 
   const ReturnOrderSum = () => {
     return [
-      { store: "A매장", sum: orderSum(fetachA) },
-      { store: "B매장", sum: orderSum(fetachB) },
-      { store: "C매장", sum: orderSum(fetachC) },
-      { store: "D매장", sum: orderSum(fetachD) },
+      {
+        store: "A매장",
+        sum: orderSum(fetachA),
+        maxTime: HighOrderTime(fetachA).maxTime,
+        maxPlatform: highOrderPlatform(fetachA).maxKey,
+      },
+      {
+        store: "B매장",
+        sum: orderSum(fetachB),
+        maxTime: HighOrderTime(fetachB).maxTime,
+        maxPlatform: highOrderPlatform(fetachB).maxKey,
+      },
+      {
+        store: "C매장",
+        sum: orderSum(fetachC),
+        maxTime: HighOrderTime(fetachC).maxTime,
+        maxPlatform: highOrderPlatform(fetachC).maxKey,
+      },
+      {
+        store: "D매장",
+        sum: orderSum(fetachD),
+        maxTime: HighOrderTime(fetachD).maxTime,
+        maxPlatform: highOrderPlatform(fetachD).maxKey,
+      },
     ];
   };
 

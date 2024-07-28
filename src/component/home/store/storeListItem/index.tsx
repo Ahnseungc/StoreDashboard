@@ -46,16 +46,18 @@ const StoreListItem: FC<StoreListItemProps> = ({ store }) => {
               </div>
               <div style={{ display: "flex", width: "100%", gap: "0.5rem" }}>
                 <Text>주문이 많은 시간대에요 </Text>
-                <h4>17시 ~ 18시</h4>
+                <h4>
+                  {store.maxTime[0]}시 ~ {store.maxTime[1]}시
+                </h4>
               </div>
               <div style={{ display: "flex", width: "100%", gap: "0.5rem" }}>
                 <Text>주문이 많은 플랫폼이에요 </Text>
-                <h4>배달의 민족</h4>
+                <h4>{store.maxPlatform}</h4>
               </div>
-              <div style={{ display: "flex", width: "100%", gap: "0.5rem" }}>
+              {/* <div style={{ display: "flex", width: "100%", gap: "0.5rem" }}>
                 <Text>주문이 많은 메뉴에요 </Text>
                 <h4>치킨</h4>
-              </div>
+              </div> */}
             </Stack>
           </CardBody>
           <CardFooter>

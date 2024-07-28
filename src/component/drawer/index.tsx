@@ -13,7 +13,6 @@ import {
 import { ReactNode } from "react";
 import { FC } from "react";
 import { useRef } from "react";
-import { Outlet } from "react-router-dom";
 
 interface DrawerComProps {
   isOpen: boolean;
@@ -48,9 +47,8 @@ const DrawerCom: FC<DrawerComProps> = ({
           <DrawerBody>{children}</DrawerBody>
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
+              닫기
             </Button>
-            <Button colorScheme="blue">Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
