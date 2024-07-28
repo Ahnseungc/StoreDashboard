@@ -11,7 +11,7 @@ const Layout: FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    pathname === "/" && setTitle("관리하고 있는 매장");
+    pathname === "/" && setTitle("관리 매장");
     pathname === "/store" && setTitle("매장 별");
     pathname === "/day" && setTitle("날짜 별");
   }, [pathname]);

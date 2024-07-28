@@ -3,7 +3,7 @@ import StoreListItem from "../storeListItem";
 import { DepartmentUl } from "./styles";
 
 interface StoreListProps {
-  stores: Array<string>;
+  stores: Array<any>;
 }
 
 const StoreList: FC<StoreListProps> = ({ stores }) => {
