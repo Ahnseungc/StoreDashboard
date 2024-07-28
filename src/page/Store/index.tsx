@@ -87,6 +87,7 @@ const Store = () => {
       </div>
       <div style={{ height: "30vh", width: "40%" }}>
         {/* 시간대별 주문 수 // 선 그래프 */}
+        <Heading style={{ fontSize: "1.5rem" }}>시간대별 주문</Heading>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             width={500}
@@ -116,6 +117,7 @@ const Store = () => {
       </div>
       {/* <div>플랫폼별 주문 분포 // 바 차트</div> */}
       <div style={{ height: "30vh", width: "40%" }}>
+        <Heading style={{ fontSize: "1.5rem" }}>플랫폼별 주문</Heading>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             width={500}
@@ -145,6 +147,7 @@ const Store = () => {
 
       {/* 인기 메뉴 주문 분포 // 바 차트 */}
       <div style={{ height: "30vh", width: "40%" }}>
+        <Heading style={{ fontSize: "1.5rem" }}>인기 메뉴 </Heading>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             width={500}

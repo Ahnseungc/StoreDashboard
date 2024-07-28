@@ -5,3 +5,9 @@ export const DefaultLayout = styled.div`
   height: 100vh;
   padding: 1rem;
 `;
+
+export const DefaultLayoutHeader = styled.header`
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+`;
