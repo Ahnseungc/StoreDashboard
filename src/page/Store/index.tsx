@@ -12,6 +12,9 @@ import {
   Line,
 } from "recharts";
 import { StoreLayout } from "./styles";
+import { useEffect, useState } from "react";
+import { RenewData } from "@utils/dataPreprocessing";
+import StoreCard from "@component/storeCard/sotreCard";
 const data = [
   {
     name: "Page A",
@@ -58,32 +61,23 @@ const data = [
 ];
 
 const Store = () => {
-  //매장별 추이
+  const [storeData, setStoreData] = useState([]);
+  const dataA = async () => {
+    setStoreData((await RenewData()).AStoreData());
+    return (await RenewData()).AStoreData();
+  };
+
+  useEffect(() => {
+    dataA();
+  }, []);
+
+  console.log(storeData);
   return (
     <StoreLayout>
       <div style={{ height: "30vh", width: "40%" }}>
-        {/* 매출 개요 // 카드 형식 */}
-        <Card>
-          <CardBody>
-            <Stack>
-              <Heading size="md">A매장</Heading>
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  gap: "0.5rem",
-                }}
-              >
-                <Text>누적 주문 건수에요 </Text>
-                <h4>4건</h4>
-              </div>
-              <div style={{ display: "flex", width: "50%", gap: "0.5rem" }}>
-                <Text>주문이 잦은 시간대에요 </Text>
-                <h4>17시 ~ 18시</h4>
-              </div>
-            </Stack>
-          </CardBody>
-        </Card>
+        {storeData.length !== 0 && (
+          <StoreCard store={storeData[0]} button={false} />
+        )}
       </div>
       <div style={{ height: "30vh", width: "40%" }}>
         {/* 시간대별 주문 수 // 선 그래프 */}

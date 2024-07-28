@@ -38,7 +38,11 @@ export const HighOrderTime = (data: any) => {
     if (highTime === 0) {
       return { maxTime: [23, 24], maxOrder: highOrder };
     } else {
-      return { maxTime: [highTime - 1, highTime], maxOrder: highOrder };
+      return {
+        maxTime: [highTime - 1, highTime],
+        maxOrder: highOrder,
+        timeAverageData: average,
+      };
     }
   } catch (err) {
     return err;

@@ -22,7 +22,19 @@ export const RenewData = async () => {
   const fetachC = await fetchDataC();
   const fetachD = await fetchDataD();
   console.log(fetachA);
-  console.log(highOrderPlatform(fetachA));
+
+  const AStoreData = () => {
+    return [
+      {
+        store: "A매장",
+        sum: orderSum(fetachA),
+        maxTime: HighOrderTime(fetachA).maxTime,
+        maxPlatform: highOrderPlatform(fetachA).maxKey,
+        timeData: HighOrderTime(fetachA).timeAverageData,
+        PlatformData: highOrderPlatform(fetachA).sumsPlatform,
+      },
+    ];
+  };
 
   const ReturnOrderSum = () => {
     return [
@@ -53,7 +65,7 @@ export const RenewData = async () => {
     ];
   };
 
-  return { ReturnOrderSum };
+  return { ReturnOrderSum, AStoreData };
 };
 
 const fetchDataA = async () => {
