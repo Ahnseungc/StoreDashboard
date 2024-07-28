@@ -21,6 +21,12 @@ export const HighOrderTime = (data: any) => {
     //각 시간대 평균
     const average = sums.map((sum) => sum / count);
 
+    //차트 데이터
+    const TimeChartData = average.map((value, index) => ({
+      name: String(index),
+      value: Math.round(value),
+    }));
+
     // 시간대 중 가장 많은 주문 수
     let highTime = 0;
     let highOrder = 0;
@@ -36,12 +42,18 @@ export const HighOrderTime = (data: any) => {
 
     //0시 일경우 23-24리턴
     if (highTime === 0) {
-      return { maxTime: [23, 24], maxOrder: highOrder };
+      return {
+        maxTime: [23, 24],
+        maxOrder: highOrder,
+        timeAverageData: average,
+        TimeChartData: TimeChartData,
+      };
     } else {
       return {
         maxTime: [highTime - 1, highTime],
         maxOrder: highOrder,
         timeAverageData: average,
+        TimeChartData: TimeChartData,
       };
     }
   } catch (err) {

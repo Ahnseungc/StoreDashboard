@@ -74,53 +74,23 @@ const Store = () => {
   console.log(storeData);
   return (
     <StoreLayout>
-      <div style={{ height: "30vh", width: "40%" }}>
+      <div style={{ height: "30vh", width: "100%" }}>
         {storeData.length !== 0 && (
           <StoreCard store={storeData[0]} button={false} />
         )}
       </div>
-      <div style={{ height: "30vh", width: "40%" }}>
-        {/* 시간대별 주문 수 // 선 그래프 */}
-        <Heading style={{ fontSize: "1.5rem" }}>시간대별 주문</Heading>
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="pv"
-              stroke="#8884d8"
-              activeDot={{ r: 8 }}
-            />
-            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      {/* <div>플랫폼별 주문 분포 // 바 차트</div> */}
+
       <div style={{ height: "30vh", width: "40%" }}>
         <Heading style={{ fontSize: "1.5rem" }}>플랫폼별 주문</Heading>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             width={500}
             height={300}
-            data={data}
+            data={storeData[0]?.PlatformData}
             margin={{
               top: 5,
               right: 30,
-              left: 20,
+              left: 0,
               bottom: 5,
             }}
             barSize={20}
@@ -128,13 +98,13 @@ const Store = () => {
             <XAxis
               dataKey="name"
               scale="point"
-              padding={{ left: 10, right: 10 }}
+              padding={{ left: 5, right: 5 }}
             />
             <YAxis />
             <Tooltip />
             <Legend />
             <CartesianGrid strokeDasharray="3 3" />
-            <Bar dataKey="pv" fill="#8884d8" background={{ fill: "#eee" }} />
+            <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -164,10 +134,41 @@ const Store = () => {
             <Tooltip />
             <Legend />
             <CartesianGrid strokeDasharray="3 3" />
-            <Bar dataKey="pv" fill="#8884d8" background={{ fill: "#eee" }} />
+            <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
           </BarChart>
         </ResponsiveContainer>
       </div>
+      <div style={{ height: "40vh", width: "100%" }}>
+        {/* 시간대별 주문 수 // 선 그래프 */}
+        <Heading style={{ fontSize: "1.5rem" }}>시간대별 평균 주문량</Heading>
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            width={500}
+            height={300}
+            data={storeData[0]?.timeData}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 0,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+            {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+      {/* <div>플랫폼별 주문 분포 // 바 차트</div> */}
     </StoreLayout>
   );
 };

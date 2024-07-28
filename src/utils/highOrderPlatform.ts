@@ -25,8 +25,14 @@ export const highOrderPlatform = (data: any) => {
       },
       ["", -Infinity] // 초기값 설정
     );
+    const storePlatformChartData = Object.entries(sumsPlatform).map(
+      ([key, value]) => ({
+        name: key,
+        value: value,
+      })
+    );
 
-    return { maxValue, maxKey, sumsPlatform };
+    return { maxValue, maxKey, sumsPlatform, storePlatformChartData };
   } catch (err) {
     return err;
   }

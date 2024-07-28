@@ -30,8 +30,8 @@ export const RenewData = async () => {
         sum: orderSum(fetachA),
         maxTime: HighOrderTime(fetachA).maxTime,
         maxPlatform: highOrderPlatform(fetachA).maxKey,
-        timeData: HighOrderTime(fetachA).timeAverageData,
-        PlatformData: highOrderPlatform(fetachA).sumsPlatform,
+        timeData: HighOrderTime(fetachA).TimeChartData,
+        PlatformData: highOrderPlatform(fetachA).storePlatformChartData,
       },
     ];
   };
@@ -66,6 +66,15 @@ export const RenewData = async () => {
   };
 
   return { ReturnOrderSum, AStoreData };
+};
+
+const storeTimeChartData = (data: any) => {
+  const TimeChartData = data.map((value, index) => ({
+    name: String(index),
+    value: Math.round(value),
+  }));
+
+  return TimeChartData;
 };
 
 const fetchDataA = async () => {
