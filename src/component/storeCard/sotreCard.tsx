@@ -23,7 +23,6 @@ interface StoreListItemProps {
 }
 
 const StoreCard: FC<StoreListItemProps> = ({ store, button, onOpen }) => {
-  console.log(store.highOrder);
   return (
     <>
       {store.highOrder === store.order && (

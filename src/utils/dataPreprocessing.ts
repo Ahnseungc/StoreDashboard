@@ -23,17 +23,52 @@ export const RenewData = async () => {
   const fetachB = await fetchDataB();
   const fetachC = await fetchDataC();
   const fetachD = await fetchDataD();
-  console.log(fetachA);
 
   const AStoreData = () => {
     return [
       {
         store: storeList[0],
-        sum: orderSum(fetachA),
+        order: orderSum(fetachA),
         maxTime: HighOrderTime(fetachA).maxTime,
         maxPlatform: highOrderPlatform(fetachA).maxKey,
         timeData: HighOrderTime(fetachA).TimeChartData,
         PlatformData: highOrderPlatform(fetachA).storePlatformChartData,
+        highOrder: highOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        lowOrder: lowOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+      },
+    ];
+  };
+  const BStoreData = () => {
+    return [
+      {
+        store: storeList[1],
+        order: orderSum(fetachB),
+        maxTime: HighOrderTime(fetachB).maxTime,
+        maxPlatform: highOrderPlatform(fetachB).maxKey,
+        timeData: HighOrderTime(fetachB).TimeChartData,
+        PlatformData: highOrderPlatform(fetachB).storePlatformChartData,
+        highOrder: highOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        lowOrder: lowOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
       },
     ];
   };
@@ -114,7 +149,7 @@ export const RenewData = async () => {
       },
     ];
   };
-  return { ReturnOrderSum, AStoreData };
+  return { ReturnOrderSum, AStoreData, BStoreData };
 };
 
 const highOrderSum = (...order: Array<number>): number => {

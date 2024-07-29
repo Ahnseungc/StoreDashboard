@@ -10,11 +10,16 @@ import {
   ResponsiveContainer,
   LineChart,
   Line,
+  PieChart,
+  Pie,
+  Cell,
 } from "recharts";
 import { StoreLayout } from "./styles";
 import { useEffect, useState } from "react";
 import { RenewData } from "@utils/dataPreprocessing";
 import StoreCard from "@component/storeCard/sotreCard";
+import { FC } from "react";
+import { useLocation } from "react-router-dom";
 const data = [
   {
     name: "Page A",
@@ -59,19 +64,64 @@ const data = [
     amt: 2100,
   },
 ];
+const data1 = [
+  { name: "Group A", value: 400 },
+  { name: "Group B", value: 300 },
+  { name: "Group C", value: 300 },
+  { name: "Group D", value: 200 },
+];
 
-const Store = () => {
+interface StorePagePros {
+  // storeName: string;
+}
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+const RADIAN = Math.PI / 180;
+
+const StorePage: FC<StorePagePros> = ({}) => {
+  const { pathname } = useLocation();
   const [storeData, setStoreData] = useState([]);
   const dataA = async () => {
     setStoreData((await RenewData()).AStoreData());
     return (await RenewData()).AStoreData();
   };
+  const dataB = async () => {
+    setStoreData((await RenewData()).BStoreData());
+    return (await RenewData()).BStoreData();
+  };
 
   useEffect(() => {
-    dataA();
-  }, []);
+    pathname.includes("A") && dataA();
+    pathname.includes("B") && dataB();
+  }, [pathname]);
 
-  console.log(storeData);
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        style={{ fontSize: "1rem" }}
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {storeData[0]?.PlatformData[index]?.name}
+      </text>
+    );
+  };
+
   return (
     <StoreLayout>
       <div style={{ height: "30vh", width: "100%" }}>
@@ -89,33 +139,25 @@ const Store = () => {
         <div style={{ height: "30vh", width: "40%" }}>
           <Heading style={{ fontSize: "1.5rem" }}>플랫폼별 주문</Heading>
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              width={500}
-              height={300}
-              data={storeData[0]?.PlatformData}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 0,
-                bottom: 5,
-              }}
-              barSize={20}
-            >
-              <XAxis
-                dataKey="name"
-                scale="point"
-                padding={{ left: 5, right: 5 }}
-              />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <CartesianGrid strokeDasharray="3 3" />
-              <Bar
-                dataKey="value"
+            <PieChart width={400} height={400}>
+              <Pie
+                data={storeData[0]?.PlatformData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={80}
                 fill="#8884d8"
-                background={{ fill: "#eee" }}
-              />
-            </BarChart>
+                dataKey="value"
+              >
+                {storeData[0]?.PlatformData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
           </ResponsiveContainer>
         </div>
 
@@ -188,4 +230,4 @@ const Store = () => {
   );
 };
 
-export default Store;
+export default StorePage;

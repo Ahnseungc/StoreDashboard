@@ -4,7 +4,7 @@ export const highOrderPlatform = (data: any) => {
       if (day.status === "success") {
         return day.data.platformCnt;
       } else {
-        throw new Error();
+        throw new Error("데이터 수신 실패");
       }
     });
     const sumsPlatform = {};

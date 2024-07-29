@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { RenewData } from "@utils/dataPreprocessing";
-import StoreList from "src/component/home/store/storeList";
+import StoreList from "@component/home/store/storeList";
 import { HomeSection } from "./style";
 import { useState } from "react";
 import { useEffect } from "react";
