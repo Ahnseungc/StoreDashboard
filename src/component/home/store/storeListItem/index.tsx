@@ -1,18 +1,7 @@
 import { FC } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  ButtonGroup,
-  Button,
-  Heading,
-  Stack,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import DrawerCom from "@component/drawer";
-import { StoreListItemHighOrderLayout, StoreListItemLi } from "./styles";
+import { StoreListItemLi } from "./styles";
 import StoreCard from "@component/storeCard/sotreCard";
 
 interface StoreListItemProps {
@@ -25,7 +14,7 @@ const StoreListItem: FC<StoreListItemProps> = ({ store }) => {
   return (
     <>
       <StoreListItemLi>
-        <StoreCard store={store} button={true} />
+        <StoreCard store={store} button={true} onOpen={onOpen} />
       </StoreListItemLi>
       {
         <DrawerCom

@@ -11,25 +11,32 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import DrawerCom from "@component/drawer";
-import { StoreListItemHighOrderLayout } from "./styles";
+import {
+  StoreListItemHighOrderLayout,
+  StoreListItemLowderLayout,
+} from "./styles";
 
 interface StoreListItemProps {
   store: any;
   button: boolean;
+  onOpen?: () => void;
 }
 
-const StoreCard: FC<StoreListItemProps> = ({ store, button }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(store);
+const StoreCard: FC<StoreListItemProps> = ({ store, button, onOpen }) => {
+  console.log(store.highOrder);
   return (
     <>
-      <StoreListItemHighOrderLayout>
-        <p>높은 주문건수를 기록하고 있어요!</p>
-      </StoreListItemHighOrderLayout>
-      <StoreListItemHighOrderLayout>
-        <p>낮은 주문건수를 기록하고 있어요!</p>
-      </StoreListItemHighOrderLayout>
+      {store.highOrder === store.order && (
+        <StoreListItemHighOrderLayout>
+          <p>높은 주문건수를 기록하고 있어요!</p>
+        </StoreListItemHighOrderLayout>
+      )}
+
+      {store.lowOrder === store.order && (
+        <StoreListItemLowderLayout>
+          <p>낮은 주문건수를 기록하고 있어요!</p>
+        </StoreListItemLowderLayout>
+      )}
       <Card>
         <CardBody>
           <Stack>
@@ -42,7 +49,7 @@ const StoreCard: FC<StoreListItemProps> = ({ store, button }) => {
               }}
             >
               <Text>누적 주문 건수에요 </Text>
-              <h4>{store.sum}건</h4>
+              <h4>{store.order}건</h4>
             </div>
             <div style={{ display: "flex", width: "100%", gap: "0.5rem" }}>
               <Text>주문이 많은 시간대에요 </Text>

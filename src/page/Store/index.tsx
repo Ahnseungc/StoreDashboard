@@ -79,64 +79,79 @@ const Store = () => {
           <StoreCard store={storeData[0]} button={false} />
         )}
       </div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ height: "30vh", width: "40%" }}>
+          <Heading style={{ fontSize: "1.5rem" }}>플랫폼별 주문</Heading>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              width={500}
+              height={300}
+              data={storeData[0]?.PlatformData}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 0,
+                bottom: 5,
+              }}
+              barSize={20}
+            >
+              <XAxis
+                dataKey="name"
+                scale="point"
+                padding={{ left: 5, right: 5 }}
+              />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Bar
+                dataKey="value"
+                fill="#8884d8"
+                background={{ fill: "#eee" }}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
 
-      <div style={{ height: "30vh", width: "40%" }}>
-        <Heading style={{ fontSize: "1.5rem" }}>플랫폼별 주문</Heading>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            width={500}
-            height={300}
-            data={storeData[0]?.PlatformData}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 0,
-              bottom: 5,
-            }}
-            barSize={20}
-          >
-            <XAxis
-              dataKey="name"
-              scale="point"
-              padding={{ left: 5, right: 5 }}
-            />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* 인기 메뉴 주문 분포 // 바 차트 */}
-      <div style={{ height: "30vh", width: "40%" }}>
-        <Heading style={{ fontSize: "1.5rem" }}>인기 메뉴 </Heading>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-            barSize={20}
-          >
-            <XAxis
-              dataKey="name"
-              scale="point"
-              padding={{ left: 10, right: 10 }}
-            />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
-          </BarChart>
-        </ResponsiveContainer>
+        {/* 인기 메뉴 주문 분포 // 바 차트 */}
+        <div style={{ height: "30vh", width: "40%" }}>
+          <Heading style={{ fontSize: "1.5rem" }}>인기 메뉴 </Heading>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              width={500}
+              height={300}
+              data={data}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+              barSize={20}
+            >
+              <XAxis
+                dataKey="name"
+                scale="point"
+                padding={{ left: 10, right: 10 }}
+              />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Bar
+                dataKey="value"
+                fill="#8884d8"
+                background={{ fill: "#eee" }}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
       <div style={{ height: "40vh", width: "100%" }}>
         {/* 시간대별 주문 수 // 선 그래프 */}

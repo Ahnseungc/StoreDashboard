@@ -16,6 +16,8 @@ const files = [
   "240607.json",
 ];
 
+const storeList = ["A매장", "B매장", "C매장", "D매장"];
+
 export const RenewData = async () => {
   const fetachA = await fetchDataA();
   const fetachB = await fetchDataB();
@@ -26,7 +28,7 @@ export const RenewData = async () => {
   const AStoreData = () => {
     return [
       {
-        store: "A매장",
+        store: storeList[0],
         sum: orderSum(fetachA),
         maxTime: HighOrderTime(fetachA).maxTime,
         maxPlatform: highOrderPlatform(fetachA).maxKey,
@@ -39,42 +41,102 @@ export const RenewData = async () => {
   const ReturnOrderSum = () => {
     return [
       {
-        store: "A매장",
-        sum: orderSum(fetachA),
+        store: storeList[0],
+        order: orderSum(fetachA),
         maxTime: HighOrderTime(fetachA).maxTime,
         maxPlatform: highOrderPlatform(fetachA).maxKey,
+        highOrder: highOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        lowOrder: lowOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
       },
       {
-        store: "B매장",
-        sum: orderSum(fetachB),
+        store: storeList[1],
+        order: orderSum(fetachB),
         maxTime: HighOrderTime(fetachB).maxTime,
         maxPlatform: highOrderPlatform(fetachB).maxKey,
+        highOrder: highOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        lowOrder: lowOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
       },
       {
-        store: "C매장",
-        sum: orderSum(fetachC),
+        store: storeList[2],
+        order: orderSum(fetachC),
         maxTime: HighOrderTime(fetachC).maxTime,
         maxPlatform: highOrderPlatform(fetachC).maxKey,
+        highOrder: highOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        lowOrder: lowOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
       },
       {
-        store: "D매장",
-        sum: orderSum(fetachD),
+        store: storeList[3],
+        order: orderSum(fetachD),
         maxTime: HighOrderTime(fetachD).maxTime,
         maxPlatform: highOrderPlatform(fetachD).maxKey,
+        highOrder: highOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        lowOrder: lowOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
       },
     ];
   };
-
   return { ReturnOrderSum, AStoreData };
 };
 
-const storeTimeChartData = (data: any) => {
-  const TimeChartData = data.map((value, index) => ({
-    name: String(index),
-    value: Math.round(value),
-  }));
+const highOrderSum = (...order: Array<number>): number => {
+  try {
+    if (orderSum.length === 0) {
+      throw new Error("주문합계가 없음");
+    }
+    return Math.max(...order);
+  } catch (err) {
+    return err;
+  }
+};
 
-  return TimeChartData;
+const lowOrderSum = (...order: Array<number>): number => {
+  try {
+    if (orderSum.length === 0) {
+      throw new Error("주문합계가 없음");
+    }
+    return Math.min(...order);
+  } catch (err) {
+    return err;
+  }
 };
 
 const fetchDataA = async () => {
