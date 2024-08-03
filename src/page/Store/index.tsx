@@ -90,10 +90,14 @@ const StorePage: FC<StorePagePros> = ({}) => {
     return (await RenewData()).BStoreData();
   };
 
+  console.log(storeData[0]?.PlatformData);
+
   useEffect(() => {
     pathname.includes("A") && dataA();
     pathname.includes("B") && dataB();
   }, [pathname]);
+
+  console.log(storeData);
 
   const renderCustomizedLabel = ({
     cx,
@@ -139,7 +143,7 @@ const StorePage: FC<StorePagePros> = ({}) => {
         <div style={{ height: "30vh", width: "40%" }}>
           <Heading style={{ fontSize: "1.5rem" }}>플랫폼별 주문</Heading>
           <ResponsiveContainer width="100%" height="100%">
-            <PieChart width={400} height={400}>
+            <PieChart width={600} height={600}>
               <Pie
                 data={storeData[0]?.PlatformData}
                 cx="50%"
@@ -163,12 +167,12 @@ const StorePage: FC<StorePagePros> = ({}) => {
 
         {/* 인기 메뉴 주문 분포 // 바 차트 */}
         <div style={{ height: "30vh", width: "40%" }}>
-          <Heading style={{ fontSize: "1.5rem" }}>인기 메뉴 </Heading>
+          <Heading style={{ fontSize: "1.5rem" }}>카테고리 별</Heading>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               width={500}
               height={300}
-              data={data}
+              data={storeData[0]?.OrderCategory}
               margin={{
                 top: 5,
                 right: 30,

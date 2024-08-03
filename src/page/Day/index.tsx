@@ -19,6 +19,15 @@ interface StoreData {
 const Day = () => {
   const [storeDataAll, setStoreDataAll] = useState<StoreData[]>();
   const [storeData, setStoreData] = useState<StoreData>();
+  const [storeName, setStoreName] = useState<string>("A매장");
+  const [color, setColor] = useState<string>("#8884d8");
+
+  const colorList = [
+    { store: "A", color: "#8884d8" },
+    { store: "B", color: "#82ca9d" },
+    { store: "C", color: "#ffc658" },
+    { store: "D", color: "#d884ab" },
+  ];
   const data = async () => {
     setStoreDataAll((await RenewData()).DailyDataAll());
     setStoreData((await RenewData()).DailyDataAll()[0]);
@@ -31,11 +40,16 @@ const Day = () => {
   }, []);
 
   useEffect(() => {
-    storeDataAll?.map((store) => {
-      pathname.includes(store.store) && setStoreData(store);
+    storeDataAll?.find((store) => {
+      if (pathname.includes(store.store)) {
+        setStoreData(store);
+        setStoreName(store.store);
+      }
     });
-    console.log(storeData);
-  }, [pathname]);
+    colorList.find((color) => {
+      storeName === color.store && setColor(color.color);
+    });
+  }, [pathname, storeName]);
 
   return (
     <div style={{ height: "100vh", padding: "3rem" }}>
@@ -59,23 +73,9 @@ const Day = () => {
             type="monotone"
             dataKey="주문"
             stackId="1"
-            stroke="#8884d8"
-            fill="#8884d8"
+            stroke={color}
+            fill={color}
           />
-          {/* <Area
-            type="monotone"
-            dataKey="B매장"
-            stackId="1"
-            stroke="#82ca9d"
-            fill="#82ca9d"
-          />
-          <Area
-            type="monotone"
-            dataKey="C매장"
-            stackId="1"
-            stroke="#ffc658"
-            fill="#ffc658"
-          /> */}
         </AreaChart>
       </ResponsiveContainer>
     </div>

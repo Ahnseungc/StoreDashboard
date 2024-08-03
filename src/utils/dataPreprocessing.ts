@@ -2,6 +2,7 @@ import { orderSum } from "./orderSum";
 import { HighOrderTime } from "./highOrderTime";
 import { highOrderPlatform } from "./highOrderPlatform";
 import { DailyData } from "./Dailydata";
+import { OrderCategory } from "./orderCategory";
 
 const directoryPathA = "/data/A매장/";
 const directoryPathB = "/data/B매장/";
@@ -55,6 +56,7 @@ export const RenewData = async () => {
           orderSum(fetachC),
           orderSum(fetachD)
         ),
+        OrderCategory: OrderCategory(fetachA).storeCategoryChartData,
       },
     ];
   };
@@ -79,6 +81,57 @@ export const RenewData = async () => {
           orderSum(fetachC),
           orderSum(fetachD)
         ),
+        OrderCategory: OrderCategory(fetachB).storeCategoryChartData,
+      },
+    ];
+  };
+  const CStoreData = () => {
+    return [
+      {
+        store: storeList[1],
+        order: orderSum(fetachC),
+        maxTime: HighOrderTime(fetachC).maxTime,
+        maxPlatform: highOrderPlatform(fetachC).maxKey,
+        timeData: HighOrderTime(fetachC).TimeChartData,
+        PlatformData: highOrderPlatform(fetachC).storePlatformChartData,
+        highOrder: highOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        lowOrder: lowOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        OrderCategory: OrderCategory(fetachC).storeCategoryChartData,
+      },
+    ];
+  };
+  const DStoreData = () => {
+    return [
+      {
+        store: storeList[1],
+        order: orderSum(fetachD),
+        maxTime: HighOrderTime(fetachD).maxTime,
+        maxPlatform: highOrderPlatform(fetachD).maxKey,
+        timeData: HighOrderTime(fetachD).TimeChartData,
+        PlatformData: highOrderPlatform(fetachD).storePlatformChartData,
+        highOrder: highOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        lowOrder: lowOrderSum(
+          orderSum(fetachA),
+          orderSum(fetachB),
+          orderSum(fetachC),
+          orderSum(fetachD)
+        ),
+        OrderCategory: OrderCategory(fetachD).storeCategoryChartData,
       },
     ];
   };
@@ -160,7 +213,14 @@ export const RenewData = async () => {
     ];
   };
 
-  return { ReturnOrderSum, DailyDataAll, AStoreData, BStoreData };
+  return {
+    ReturnOrderSum,
+    DailyDataAll,
+    AStoreData,
+    BStoreData,
+    CStoreData,
+    DStoreData,
+  };
 };
 
 const highOrderSum = (...order: Array<number>): number => {
