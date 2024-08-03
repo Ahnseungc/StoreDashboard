@@ -1,35 +1,23 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { NavbarLayout } from "./styles";
-import { useEffect, useState } from "react";
-import { RenewData } from "@utils/dataPreprocessing";
-import StorePage from "@page/Store";
-import { useLocation, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+import { FC } from "react";
 
-  const storeList = [
-    { id: "A", name: "A매장" },
-    { id: "B", name: "B매장" },
-    { id: "C", name: "C매장" },
-    { id: "D", name: "D매장" },
-  ];
-  const initialTabIndex = storeList.findIndex(
-    (store) => `/store/${store.id}` === location.pathname
-  );
+interface StoreList {
+  id: string;
+  name: string;
+}
 
-  const [selectedTab, setSelectedTab] = useState(
-    initialTabIndex === -1 ? 0 : initialTabIndex
-  );
+interface NavBarProps {
+  onChange: (index: number) => void;
+  storeList: Array<StoreList>;
+  selectedTab: number;
+}
 
-  const onChangeTab = (index: number) => {
-    setSelectedTab(index);
-    navigate(`/store/${storeList[index].id}`);
-  };
+const Navbar: FC<NavBarProps> = ({ storeList, onChange, selectedTab }) => {
   return (
     <NavbarLayout>
-      <Tabs variant="enclosed" index={selectedTab} onChange={onChangeTab}>
+      <Tabs variant="enclosed" index={selectedTab} onChange={onChange}>
         <TabList>
           {storeList.map((store) => {
             return <Tab key={store.id}>{store.name}</Tab>;

@@ -1,7 +1,7 @@
 import { orderSum } from "../orderSum";
 
 describe("orderSum", () => {
-  it("should return the sum of orderCnt for successful orders", () => {
+  it("상태가 성공만 있는 케이스", () => {
     const data = [
       { status: "success", data: { orderCnt: 5 } },
       { status: "success", data: { orderCnt: 10 } },
@@ -12,7 +12,7 @@ describe("orderSum", () => {
     expect(result).toBe(30); // 5 + 10 + 15
   });
 
-  it("should return an error when any order has a status other than success", () => {
+  it("상태가 실패와 성공이 공존하는 케이스", () => {
     const data = [
       { status: "success", data: { orderCnt: 5 } },
       { status: "failed", data: { orderCnt: 10 } }, // This will trigger an error
@@ -23,7 +23,7 @@ describe("orderSum", () => {
     expect(result).toBeInstanceOf(Error);
   });
 
-  it("should return 0 when there are no successful orders", () => {
+  it("상태가 실패만 있는 케이스", () => {
     const data = [
       { status: "failed", data: { orderCnt: 5 } },
       { status: "failed", data: { orderCnt: 10 } },
@@ -34,7 +34,7 @@ describe("orderSum", () => {
     expect(result).toBeInstanceOf(Error); // No successful orders, so the sum should be 0
   });
 
-  it("should return 0 for an empty data array", () => {
+  it("데이터가 없을때", () => {
     const data = [];
 
     const result = orderSum(data);

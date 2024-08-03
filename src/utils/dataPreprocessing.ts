@@ -1,6 +1,7 @@
 import { orderSum } from "./orderSum";
 import { HighOrderTime } from "./highOrderTime";
 import { highOrderPlatform } from "./highOrderPlatform";
+import { DailyData } from "./Dailydata";
 
 const directoryPathA = "/data/A매장/";
 const directoryPathB = "/data/B매장/";
@@ -23,6 +24,15 @@ export const RenewData = async () => {
   const fetachB = await fetchDataB();
   const fetachC = await fetchDataC();
   const fetachD = await fetchDataD();
+
+  const DailyDataAll = () => {
+    return [
+      { store: "A", data: DailyData(fetachA) },
+      { store: "B", data: DailyData(fetachB) },
+      { store: "C", data: DailyData(fetachC) },
+      { store: "D", data: DailyData(fetachD) },
+    ];
+  };
 
   const AStoreData = () => {
     return [
@@ -149,7 +159,8 @@ export const RenewData = async () => {
       },
     ];
   };
-  return { ReturnOrderSum, AStoreData, BStoreData };
+
+  return { ReturnOrderSum, DailyDataAll, AStoreData, BStoreData };
 };
 
 const highOrderSum = (...order: Array<number>): number => {

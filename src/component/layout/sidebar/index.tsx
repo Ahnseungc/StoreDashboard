@@ -41,10 +41,10 @@ const Sidebar = () => {
                 <li onClick={() => navigate("/")}>
                   <p>홈</p>
                 </li>
-                <li onClick={() => navigate("/day")}>
+                <li onClick={() => navigate("/day/A")}>
                   <p>일별 관리</p>
                 </li>
-                <li onClick={() => navigate("/store")}>
+                <li onClick={() => navigate("/store/A")}>
                   <p>매장별 관리</p>
                 </li>
               </SidebarNavUl>
