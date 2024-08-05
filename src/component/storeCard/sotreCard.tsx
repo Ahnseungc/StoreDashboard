@@ -39,7 +39,7 @@ const StoreCard: FC<StoreListItemProps> = ({ store, button, onOpen }) => {
       <Card>
         <CardBody>
           <Stack>
-            <Heading size="md">{store.store}</Heading>
+            <Heading size="md">{store.store} 매장</Heading>
             <div
               style={{
                 display: "flex",

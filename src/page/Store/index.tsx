@@ -89,20 +89,20 @@ const StorePage: FC<StorePagePros> = ({}) => {
   const { pathname } = useLocation();
   const [storeData, setStoreData] = useState([]);
   const dataA = async () => {
-    setStoreData((await RenewData()).AStoreData());
-    return (await RenewData()).AStoreData();
+    setStoreData((await RenewData()).storeData({ type: "A" }));
+    return (await RenewData()).storeData({ type: "A" });
   };
   const dataB = async () => {
-    setStoreData((await RenewData()).BStoreData());
-    return (await RenewData()).BStoreData();
+    setStoreData((await RenewData()).storeData({ type: "B" }));
+    return (await RenewData()).storeData({ type: "B" });
   };
   const dataC = async () => {
-    setStoreData((await RenewData()).CStoreData());
-    return (await RenewData()).CStoreData();
+    setStoreData((await RenewData()).storeData({ type: "C" }));
+    return (await RenewData()).storeData({ type: "C" });
   };
   const dataD = async () => {
-    setStoreData((await RenewData()).DStoreData());
-    return (await RenewData()).DStoreData();
+    setStoreData((await RenewData()).storeData({ type: "D" }));
+    return (await RenewData()).storeData({ type: "D" });
   };
 
   useEffect(() => {
@@ -140,8 +140,6 @@ const StorePage: FC<StorePagePros> = ({}) => {
       </text>
     );
   };
-
-  console.log(storeData[0]?.PlatformData);
 
   return (
     <StoreLayout>

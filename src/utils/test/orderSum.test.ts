@@ -1,4 +1,4 @@
-import { orderSum } from "../orderSum";
+import { orderSum } from "../order/orderSum";
 
 describe("orderSum", () => {
   it("상태가 성공만 있는 케이스", () => {

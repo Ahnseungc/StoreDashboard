@@ -8,6 +8,7 @@ export const orderSum = (data: any) => {
         throw new Error("데이터 수신 실패");
       }
     });
+
     return sum;
   } catch (err) {
     return err;

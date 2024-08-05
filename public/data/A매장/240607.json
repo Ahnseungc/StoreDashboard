@@ -57,6 +57,42 @@
       "21": 10,
       "22": 1,
       "23": 2
+    },
+    "orderRevenue": {
+      "2024-06-07": {
+        "17": 30000,
+        "18": 20000,
+        "19": 40000,
+        "21": 10000
+      }
+    },
+    "orderProcessingTime": {
+      "order1": {
+        "orderReceivedTime": "2024-06-07T17:05:00",
+        "orderCompletedTime": "2024-06-07T17:35:00"
+      },
+      "order2": {
+        "orderReceivedTime": "2024-06-07T18:10:00",
+        "orderCompletedTime": "2024-06-07T18:40:00"
+      },
+      "order3": {
+        "orderReceivedTime": "2024-06-07T19:20:00",
+        "orderCompletedTime": "2024-06-07T19:50:00"
+      }
+    },
+    "orderDiscountInfo": {
+      "order1": {
+        "discountApplied": true,
+        "discountAmount": 5000
+      },
+      "order2": {
+        "discountApplied": false,
+        "discountAmount": 0
+      },
+      "order3": {
+        "discountApplied": true,
+        "discountAmount": 3000
+      }
     }
   }
 }

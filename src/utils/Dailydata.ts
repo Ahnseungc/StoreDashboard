@@ -1,6 +1,6 @@
-interface DailyDataProps {
-  data: any;
-}
+// interface dailyDataProps {
+//   data: any;
+// }
 
 export const DailyData = (data: any) => {
   const DailyOrderSum = data?.map((day) => {
