@@ -1,6 +1,5 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { NavbarLayout } from "./styles";
-
 import { FC } from "react";
 
 interface StoreList {

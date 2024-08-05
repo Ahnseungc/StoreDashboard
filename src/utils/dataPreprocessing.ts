@@ -3,6 +3,7 @@ import { HighOrderTime } from "./highOrderTime";
 import { highOrderPlatform } from "./highOrderPlatform";
 import { DailyData } from "./Dailydata";
 import { OrderCategory } from "./orderCategory";
+import { highOrderMenu } from "./higtOrderMenu";
 
 const directoryPathA = "/data/A매장/";
 const directoryPathB = "/data/B매장/";
@@ -44,6 +45,7 @@ export const RenewData = async () => {
         maxPlatform: highOrderPlatform(fetachA).maxKey,
         timeData: HighOrderTime(fetachA).TimeChartData,
         PlatformData: highOrderPlatform(fetachA).storePlatformChartData,
+        popularOrderMenu: highOrderMenu(fetachA).storePopularMenuChartData,
         highOrder: highOrderSum(
           orderSum(fetachA),
           orderSum(fetachB),
@@ -57,6 +59,7 @@ export const RenewData = async () => {
           orderSum(fetachD)
         ),
         OrderCategory: OrderCategory(fetachA).storeCategoryChartData,
+        OrderMenu: highOrderMenu(fetachA).sumsOrder,
       },
     ];
   };
@@ -88,7 +91,7 @@ export const RenewData = async () => {
   const CStoreData = () => {
     return [
       {
-        store: storeList[1],
+        store: storeList[2],
         order: orderSum(fetachC),
         maxTime: HighOrderTime(fetachC).maxTime,
         maxPlatform: highOrderPlatform(fetachC).maxKey,
@@ -113,7 +116,7 @@ export const RenewData = async () => {
   const DStoreData = () => {
     return [
       {
-        store: storeList[1],
+        store: storeList[3],
         order: orderSum(fetachD),
         maxTime: HighOrderTime(fetachD).maxTime,
         maxPlatform: highOrderPlatform(fetachD).maxKey,
@@ -143,6 +146,8 @@ export const RenewData = async () => {
         order: orderSum(fetachA),
         maxTime: HighOrderTime(fetachA).maxTime,
         maxPlatform: highOrderPlatform(fetachA).maxKey,
+        highOrderMenu: highOrderMenu(fetachA).maxKey,
+
         highOrder: highOrderSum(
           orderSum(fetachA),
           orderSum(fetachB),

@@ -70,6 +70,9 @@ const StoreCard: FC<StoreListItemProps> = ({ store, button, onOpen }) => {
                   <Button variant="solid" colorScheme="blue" onClick={onOpen}>
                     상세보기
                   </Button>
+                  <Button variant="outline" colorScheme="blue" onClick={onOpen}>
+                    주문 진행중
+                  </Button>
                 </ButtonGroup>
               </CardFooter>
             )}

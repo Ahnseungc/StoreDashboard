@@ -1,8 +1,9 @@
 import { FC } from "react";
-import { useDisclosure } from "@chakra-ui/react";
+import { Heading, useDisclosure, Text } from "@chakra-ui/react";
 import DrawerCom from "@component/drawer";
 import { StoreListItemLi } from "./styles";
 import StoreCard from "@component/storeCard/sotreCard";
+import StoreListDrawer from "../storeListDrawer";
 
 interface StoreListItemProps {
   store: any;
@@ -16,19 +17,7 @@ const StoreListItem: FC<StoreListItemProps> = ({ store }) => {
       <StoreListItemLi>
         <StoreCard store={store} button={true} onOpen={onOpen} />
       </StoreListItemLi>
-      {
-        <DrawerCom
-          isOpen={isOpen}
-          onClose={onClose}
-          size="full"
-          heading="A매장"
-        >
-          <div>
-            <div>주문 건수</div>
-            <div>메뉴 건수</div>
-          </div>
-        </DrawerCom>
-      }
+      <StoreListDrawer store={store} isOpen={isOpen} onClose={onClose} />
     </>
   );
 };

@@ -5,6 +5,6 @@ export const StoreLayout = styled.section`
   height: 100vh;
   display: flex;
   flex-wrap: wrap;
-  gap: 7rem;
+  gap: 4rem;
   padding: 4rem;
 `;

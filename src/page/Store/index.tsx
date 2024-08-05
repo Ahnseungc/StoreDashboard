@@ -13,6 +13,13 @@ import {
   PieChart,
   Pie,
   Cell,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+  ComposedChart,
+  Area,
 } from "recharts";
 import { StoreLayout } from "./styles";
 import { useEffect, useState } from "react";
@@ -89,15 +96,21 @@ const StorePage: FC<StorePagePros> = ({}) => {
     setStoreData((await RenewData()).BStoreData());
     return (await RenewData()).BStoreData();
   };
-
-  console.log(storeData[0]?.PlatformData);
+  const dataC = async () => {
+    setStoreData((await RenewData()).CStoreData());
+    return (await RenewData()).CStoreData();
+  };
+  const dataD = async () => {
+    setStoreData((await RenewData()).DStoreData());
+    return (await RenewData()).DStoreData();
+  };
 
   useEffect(() => {
     pathname.includes("A") && dataA();
     pathname.includes("B") && dataB();
+    pathname.includes("C") && dataC();
+    pathname.includes("D") && dataD();
   }, [pathname]);
-
-  console.log(storeData);
 
   const renderCustomizedLabel = ({
     cx,
@@ -112,6 +125,8 @@ const StorePage: FC<StorePagePros> = ({}) => {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
+    // console.log
+
     return (
       <text
         x={x}
@@ -125,6 +140,8 @@ const StorePage: FC<StorePagePros> = ({}) => {
       </text>
     );
   };
+
+  console.log(storeData[0]?.PlatformData);
 
   return (
     <StoreLayout>
@@ -143,7 +160,7 @@ const StorePage: FC<StorePagePros> = ({}) => {
         <div style={{ height: "30vh", width: "40%" }}>
           <Heading style={{ fontSize: "1.5rem" }}>플랫폼별 주문</Heading>
           <ResponsiveContainer width="100%" height="100%">
-            <PieChart width={600} height={600}>
+            {/* <PieChart width={600} height={600}>
               <Pie
                 data={storeData[0]?.PlatformData}
                 cx="50%"
@@ -161,7 +178,44 @@ const StorePage: FC<StorePagePros> = ({}) => {
                   />
                 ))}
               </Pie>
-            </PieChart>
+            </PieChart> */}
+            {/* <RadarChart
+              cx="50%"
+              cy="50%"
+              outerRadius="80%"
+              data={storeData[0]?.PlatformData}
+            >
+              <PolarGrid />
+              <PolarAngleAxis dataKey="name" />
+              <PolarRadiusAxis />
+              <Radar
+                name="Mike"
+                dataKey="value"
+                stroke="#8884d8"
+                fill="#8884d8"
+                fillOpacity={0.6}
+              />
+            </RadarChart> */}
+            <ComposedChart
+              layout="vertical"
+              width={500}
+              height={400}
+              data={storeData[0]?.PlatformData}
+              margin={{
+                top: 20,
+                right: 20,
+                bottom: 20,
+                left: 20,
+              }}
+            >
+              <CartesianGrid stroke="#f5f5f5" />
+              <XAxis type="number" />
+              <YAxis dataKey="name" type="category" scale="band" />
+              <Tooltip />
+              <Legend />
+
+              <Bar dataKey="value" barSize={20} fill="#8884d8" />
+            </ComposedChart>
           </ResponsiveContainer>
         </div>
 
