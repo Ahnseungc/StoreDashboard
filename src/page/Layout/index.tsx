@@ -2,10 +2,10 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { DefaultLayout, DefaultLayoutHeader } from "./styes";
 import { FC } from "react";
 import Sidebar from "@component/layout/sidebar";
-import { Heading } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect } from "react";
 import Navbar from "@component/layout/navbar";
+import { Heading } from "@chakra-ui/react";
 
 const storeList = [
   { id: "A", name: "A매장" },
@@ -19,7 +19,6 @@ const Layout: FC = () => {
   const { pathname } = useLocation();
   const [selectedTab, setSelectedTab] = useState(0);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onChangeStoreTab = (index: number) => {
     setSelectedTab(index);
@@ -35,16 +34,14 @@ const Layout: FC = () => {
     pathname === "/" && setTitle("관리 매장");
     pathname === "/store" && setTitle("매장 별");
     pathname === "/day" && setTitle("일 별");
+    setSelectedTab(0);
   }, [pathname]);
 
   return (
     <DefaultLayout>
       <DefaultLayoutHeader>
         <Sidebar />
-        {/* {!pathname.includes("/store") ||
-          (!pathname.includes("/day") && (
-            <Heading style={{ fontSize: "1.8rem" }}>{title}</Heading>
-          ))} */}
+
         {pathname.includes("/store") && (
           <Navbar
             storeList={storeList}

@@ -1,5 +1,19 @@
 import { FC, useEffect, useState } from "react";
-import { Heading, useDisclosure, Text } from "@chakra-ui/react";
+import {
+  Heading,
+  useDisclosure,
+  Text,
+  Badge,
+  TableContainer,
+  Table,
+  TableCaption,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  Tfoot,
+} from "@chakra-ui/react";
 import DrawerCom from "@component/drawer";
 import { RenewData } from "@utils/dataPreprocessing";
 import {
@@ -15,6 +29,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { StoreListItemHighOrderLayout } from "../storeListItem/styles";
+import { StoreListItemLowderLayout } from "@component/storeCard/styles";
 
 interface StoreListDrawerProps {
   store: any;
@@ -52,6 +68,9 @@ const StoreListDrawer: FC<StoreListDrawerProps> = ({
     store.store === "D" && dataD();
   }, [store]);
 
+  console.log(storeData);
+  console.log(store);
+
   return (
     <>
       <DrawerCom
@@ -61,65 +80,105 @@ const StoreListDrawer: FC<StoreListDrawerProps> = ({
         heading={`${store.store} 매장`}
       >
         {storeData && (
-          <>
-            <div style={{ display: "flex" }}>
-              <div>
-                <Heading style={{ fontSize: "1.5rem" }}>주문 건수</Heading>
-                <h4>{store.order}건</h4>
+          <div style={{ padding: "1rem" }}>
+            {store.lowOrder === store.order && (
+              <Badge colorScheme="red">낮은 주문건수를 기록하고 있어요!</Badge>
+            )}
+            {store.highOrder === store.order && (
+              <Badge colorScheme="blue">
+                <p>높은 주문건수를 기록하고 있어요!</p>
+              </Badge>
+            )}
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  gap: "5rem",
+                  marginTop: "2rem",
+                }}
+              >
+                <div>
+                  <Heading style={{ fontSize: "1.5rem" }}>주문 건수</Heading>
+                  <h4>{store.order}건</h4>
+                </div>
+                <div>
+                  <Heading style={{ fontSize: "1.5rem" }}>
+                    주문 메뉴 건수
+                  </Heading>
+                  <h4>{store.order}건</h4>
+                </div>
               </div>
-              <div>
-                <Heading style={{ fontSize: "1.5rem" }}>메뉴 건수</Heading>
-                <h4>{store.order}건</h4>
-              </div>
-              <div>
-                <Heading style={{ fontSize: "1.5rem" }}>
-                  주문이 많은 플랫폼
-                </Heading>
-                <h4>{store.maxPlatform}</h4>
-              </div>
-            </div>
-            {/* <div style={{ display: "flex" }}>
-          {storeData[0]?.popularOrderMenu?.map((menu, index) => {
-            return (
-              <span>
-                <h4>{index + 1}등</h4>
-                <Text>{menu.name}</Text>
-              </span>
-            );
-          })}
-        </div> */}
-            <div style={{ width: "50vw", height: "40vh" }}>
-              <Heading style={{ fontSize: "1.5rem" }}>인기 메뉴</Heading>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  width={500}
-                  height={300}
-                  data={storeData[0]?.popularOrderMenu}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
+              <div
+                style={{
+                  marginTop: "5rem",
+                  display: "flex",
+                  width: "100%",
+                  gap: "5rem",
+                }}
+              >
+                <div>
+                  <Heading style={{ fontSize: "1.5rem" }}>
+                    인기 많은 플랫폼
+                  </Heading>
 
-                  <Bar
-                    dataKey="value"
-                    fill="#82ca9d"
-                    // activeBar={<Rectangle fill="gold" stroke="purple" />}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
+                  <TableContainer mt="1rem">
+                    <Table
+                      // variant="simple"
+                      variant="striped"
+                      colorScheme="teal"
+                    >
+                      <Tbody>
+                        {storeData[0]?.PlatformData?.map((menu, index) => {
+                          return (
+                            <Tr style={{ marginTop: "0.5rem" }}>
+                              <Td>
+                                <Text>{index + 1}등</Text>
+                              </Td>
+                              <Td>
+                                <Text fontWeight="bold">{menu.name}</Text>
+                              </Td>
+                              <Td>
+                                <Text>{menu.value}건</Text>
+                              </Td>
+                            </Tr>
+                          );
+                        })}
+                      </Tbody>
+                    </Table>
+                  </TableContainer>
+                </div>
+                <div>
+                  <Heading style={{ fontSize: "1.5rem" }}>인기 메뉴</Heading>
+                  <TableContainer mt="1rem">
+                    <Table variant="striped" colorScheme="blue">
+                      <Tbody>
+                        {storeData[0]?.popularOrderMenu?.map((menu, index) => {
+                          return (
+                            <Tr style={{ marginTop: "0.5rem" }}>
+                              <Td>
+                                <Text>{index + 1}등</Text>
+                              </Td>
+                              <Td>
+                                <Text fontWeight="bold">{menu.name}</Text>
+                              </Td>
+                              <Td>
+                                <Text>{menu.value}건</Text>
+                              </Td>
+                            </Tr>
+                          );
+                        })}
+                      </Tbody>
+                    </Table>
+                  </TableContainer>
+                </div>
+              </div>
             </div>
-            <Text>
-              피크 시간대(그래프){`${store.maxTime[0]}~${store.maxTime[1]}`}
-            </Text>
-          </>
+            <Heading style={{ fontSize: "1.5rem", marginTop: "2rem" }}>
+              주문 많은 시간대
+            </Heading>
+            <div>{`${store.maxTime[0]}시 ~ ${store.maxTime[1]}시`}</div>
+          </div>
         )}
       </DrawerCom>
     </>

@@ -8,7 +8,7 @@ export const StoreListItemHighOrderLayout = styled.div`
   background-color: white;
   /* border: 1px solid red; */
   border-radius: 1.25rem;
-  color: red;
+  color: blue;
   padding: 0.5rem;
   font-size: 0.7rem;
 `;

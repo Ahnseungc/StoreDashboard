@@ -1,13 +1,14 @@
 import { orderSum } from "./order/orderSum";
-import { HighOrderTime } from "./high/highOrderTime";
-import { highOrderPlatform } from "./high/highOrderPlatform";
-import { highOrderSum } from "./high/highOrderSum";
-import { lowOrderSum } from "./low/lowOrderSum";
+import { HighOrderTime } from "./time/highOrderTime";
+import { highOrderPlatform } from "./platform/highOrderPlatform";
+import { highOrderSum } from "./order/highOrderSum";
+import { lowOrderSum } from "./order/lowOrderSum";
 import { DailyData } from "./dailydata";
-import { OrderCategory } from "./order/orderCategory";
-import { highOrderMenu } from "./high/higtOrderMenu";
+import { OrderCategory } from "./category/orderCategory";
+import { highOrderMenu } from "./menu/higtOrderMenu";
 import { fetchData } from "./fetchData";
 import { fetchDataProps } from "./fetchData";
+import { ArriveAverage } from "./time/arriveAverage";
 
 export const RenewData = async () => {
   const storeList = ["A", "B", "C", "D"];

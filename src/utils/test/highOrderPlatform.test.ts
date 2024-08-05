@@ -1,4 +1,4 @@
-import { highOrderPlatform } from "../high/highOrderPlatform";
+import { highOrderPlatform } from "../platform/highOrderPlatform";
 
 describe("highOrderPlatform", () => {
   it("should return the maximum value platform and its data", () => {

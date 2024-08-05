@@ -6,14 +6,17 @@ import { lazy } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 
 const ErrorPage = lazy(() => import("@page/Error"));
+const Loading = lazy(() => import("@page/Loading"));
 
 function App() {
   return (
     <>
-      <Suspense fallback={<ErrorPage />}>
+      <Suspense fallback={<Loading />}>
         <BrowserRouter>
           <ChakraProvider>
-            <Router />
+            <ErrorPage>
+              <Router />
+            </ErrorPage>
           </ChakraProvider>
         </BrowserRouter>
       </Suspense>
