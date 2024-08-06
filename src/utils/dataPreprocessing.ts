@@ -50,7 +50,6 @@ export const RenewData = async () => {
 
   const storeData = ({ type }: fetchDataProps) => {
     const no = storeList.indexOf(type);
-
     return [
       {
         store: storeList[no],

@@ -116,7 +116,9 @@ const StorePage: FC<StorePagePros> = ({}) => {
         }}
       >
         <div style={{ height: "30vh", width: "40%" }}>
-          <Heading style={{ fontSize: "1.5rem" }}>플랫폼별 주문</Heading>
+          <Heading mb="1rem" style={{ fontSize: "1.5rem" }}>
+            플랫폼별 주문
+          </Heading>
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
               layout="vertical"
@@ -143,7 +145,9 @@ const StorePage: FC<StorePagePros> = ({}) => {
 
         {/* 인기 메뉴 주문 분포 // 바 차트 */}
         <div style={{ height: "30vh", width: "40%" }}>
-          <Heading style={{ fontSize: "1.5rem" }}>카테고리 별</Heading>
+          <Heading mb="1rem" style={{ fontSize: "1.5rem" }}>
+            카테고리 별
+          </Heading>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               width={500}
@@ -177,7 +181,9 @@ const StorePage: FC<StorePagePros> = ({}) => {
       </div>
       <div style={{ height: "40vh", width: "100%" }}>
         {/* 시간대별 주문 수 // 선 그래프 */}
-        <Heading style={{ fontSize: "1.5rem" }}>시간대별 평균 주문량</Heading>
+        <Heading mb="1rem" style={{ fontSize: "1.5rem" }}>
+          시간대별 평균 주문량
+        </Heading>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             width={500}
@@ -209,6 +215,7 @@ const StorePage: FC<StorePagePros> = ({}) => {
       <div
         style={{
           width: "100%",
+          marginTop: "4rem",
         }}
       >
         <div
