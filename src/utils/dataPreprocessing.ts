@@ -9,6 +9,9 @@ import { highOrderMenu } from "./menu/higtOrderMenu";
 import { fetchData } from "./fetchData";
 import { fetchDataProps } from "./fetchData";
 import { ArriveAverage } from "./time/arriveAverage";
+import { dailyOrder } from "./order/dailyOrder";
+import { dailyDetailOrder } from "./detail/dailyOrderDetail";
+import { orderDetailSum } from "./detail/orderDetailSum";
 
 export const RenewData = async () => {
   const storeList = ["A", "B", "C", "D"];
@@ -47,19 +50,26 @@ export const RenewData = async () => {
 
   const storeData = ({ type }: fetchDataProps) => {
     const no = storeList.indexOf(type);
+
     return [
       {
         store: storeList[no],
         order: orderSum(dataList[no]),
+        detailOrder: orderSum(dataList[no]),
         maxTime: HighOrderTime(dataList[no]).maxTime,
         maxPlatform: highOrderPlatform(dataList[no]).maxKey,
         timeData: HighOrderTime(dataList[no]).TimeChartData,
+        timeHighOrder: HighOrderTime(dataList[no]).maxOrder,
         PlatformData: highOrderPlatform(dataList[no]).storePlatformChartData,
         popularOrderMenu: highOrderMenu(dataList[no]).storePopularMenuChartData,
         highOrder: highOrder,
         lowOrder: lowOrder,
         OrderCategory: OrderCategory(dataList[no]).storeCategoryChartData,
-        OrderMenu: highOrderMenu(dataList[no]).sumsOrder,
+        OrderMenu: highOrderMenu(dataList[no]).storeMenuList,
+        dailyOrderCount: dailyOrder(dataList[no]),
+        dailyDetailOrder: dailyDetailOrder(dataList[no]),
+        orderDetailSum: orderDetailSum(dataList[no]),
+        highOrderMenu: highOrderMenu(dataList[no]).maxKey,
       },
     ];
   };

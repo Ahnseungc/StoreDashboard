@@ -1,4 +1,21 @@
-import { Text, Card, CardBody, Heading, Stack } from "@chakra-ui/react";
+import {
+  Text,
+  Card,
+  CardBody,
+  Heading,
+  Stack,
+  Box,
+  TableContainer,
+  Table,
+  Tbody,
+  Tr,
+  Td,
+  Thead,
+  Th,
+  Tfoot,
+  Button,
+  Input,
+} from "@chakra-ui/react";
 import {
   BarChart,
   Bar,
@@ -23,11 +40,12 @@ interface StorePagePros {
   // storeName: string;
 }
 
-const RADIAN = Math.PI / 180;
-
 const StorePage: FC<StorePagePros> = ({}) => {
   const { pathname } = useLocation();
   const [storeData, setStoreData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const pageSize = 10;
   const dataA = async () => {
     setStoreData((await RenewData()).storeData({ type: "A" }));
     return (await RenewData()).storeData({ type: "A" });
@@ -52,34 +70,35 @@ const StorePage: FC<StorePagePros> = ({}) => {
     pathname.includes("D") && dataD();
   }, [pathname]);
 
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    // console.log
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        style={{ fontSize: "1rem" }}
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {storeData[0]?.PlatformData[index]?.name}
-      </text>
+  //필터
+  const getFilteredData = () => {
+    if (!storeData[0]?.OrderMenu) return [];
+    return storeData[0]?.OrderMenu?.filter((item) =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
   };
+
+  //페이지네이션
+  const getCurretnPageData = () => {
+    const startIndex = (currentPage - 1) * pageSize;
+    const filteredData = getFilteredData();
+    return filteredData.slice(startIndex, startIndex + pageSize) || [];
+  };
+
+  const pageCount = Math.ceil(
+    (storeData[0]?.OrderMenu?.length || 0) / pageSize
+  );
+
+  const handlePageonChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const onChangeInput = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
+  };
+
+  console.log(storeData);
 
   return (
     <StoreLayout>
@@ -88,6 +107,7 @@ const StorePage: FC<StorePagePros> = ({}) => {
           <StoreCard store={storeData[0]} button={false} />
         )}
       </div>
+
       <div
         style={{
           width: "100%",
@@ -98,42 +118,6 @@ const StorePage: FC<StorePagePros> = ({}) => {
         <div style={{ height: "30vh", width: "40%" }}>
           <Heading style={{ fontSize: "1.5rem" }}>플랫폼별 주문</Heading>
           <ResponsiveContainer width="100%" height="100%">
-            {/* <PieChart width={600} height={600}>
-              <Pie
-                data={storeData[0]?.PlatformData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={renderCustomizedLabel}
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {storeData[0]?.PlatformData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart> */}
-            {/* <RadarChart
-              cx="50%"
-              cy="50%"
-              outerRadius="80%"
-              data={storeData[0]?.PlatformData}
-            >
-              <PolarGrid />
-              <PolarAngleAxis dataKey="name" />
-              <PolarRadiusAxis />
-              <Radar
-                name="Mike"
-                dataKey="value"
-                stroke="#8884d8"
-                fill="#8884d8"
-                fillOpacity={0.6}
-              />
-            </RadarChart> */}
             <ComposedChart
               layout="vertical"
               width={500}
@@ -221,7 +205,93 @@ const StorePage: FC<StorePagePros> = ({}) => {
           </LineChart>
         </ResponsiveContainer>
       </div>
-      {/* <div>플랫폼별 주문 분포 // 바 차트</div> */}
+
+      <div
+        style={{
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Heading style={{ fontSize: "1.5rem" }}>주문 메뉴 현황</Heading>
+          <Input
+            placeholder="메뉴 이름을 입력해 주세요."
+            style={{ width: "60%" }}
+            onChange={(e) => onChangeInput(e)}
+          />
+        </div>
+        <TableContainer mt="1rem" height="63vh" overflowY="auto">
+          <Table
+            variant="simple"
+            colorScheme="pink"
+            style={{ tableLayout: "fixed" }}
+          >
+            <Thead>
+              <Tr>
+                <Th>no</Th>
+                <Th>메뉴</Th>
+                <Th>주문</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {storeData[0] &&
+                getCurretnPageData()?.map((data, index) => {
+                  return (
+                    <Tr key={index} style={{ marginTop: "0.5rem" }}>
+                      <Td>
+                        <Text>{(currentPage - 1) * pageSize + index + 1}</Text>
+                      </Td>
+                      <Td>
+                        <Text fontWeight="bold">{data.name}</Text>
+                      </Td>
+                      <Td>
+                        <Text>{data.value}건</Text>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <Box position="relative" height="13vh">
+          <Box
+            mt="1rem"
+            position="absolute"
+            height="5rem"
+            left="50%"
+            transform="translateX(-50%)"
+            bottom="0"
+          >
+            <Button
+              onClick={() => handlePageonChange(currentPage - 1)}
+              isDisabled={currentPage === 1}
+            >
+              이전
+            </Button>
+            {Array.from({ length: pageCount }, (_, index) => (
+              <Button
+                key={index}
+                onClick={() => handlePageonChange(index + 1)}
+                isActive={currentPage === index + 1}
+                mx="0.5rem"
+              >
+                {index + 1}
+              </Button>
+            ))}
+            <Button
+              onClick={() => handlePageonChange(currentPage + 1)}
+              isDisabled={currentPage === pageCount}
+            >
+              다음
+            </Button>
+          </Box>
+        </Box>
+      </div>
     </StoreLayout>
   );
 };

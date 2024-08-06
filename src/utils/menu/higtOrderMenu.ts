@@ -39,6 +39,11 @@ export const highOrderMenu = (data: any) => {
       })
     );
 
+    const storeMenuList = Object.entries(sumsOrder).map(([key, value]) => ({
+      name: key,
+      value: value,
+    }));
+
     const storePopularMenuChartData = Object.entries(popularMenu).map(
       ([key, value]) => ({
         name: key,
@@ -49,7 +54,7 @@ export const highOrderMenu = (data: any) => {
     return {
       maxValue,
       maxKey,
-      sumsOrder,
+      storeMenuList,
       storePlatformChartData,
       storePopularMenuChartData,
     };
